@@ -1,0 +1,27 @@
+#include "redis.h"
+
+void wordListBuild(){
+    
+
+}
+
+int main(){
+    Redis *r = new Redis();
+    if(!r->connect("127.0.0.1", 6379))
+    {
+        printf("connect error!\n");
+        return 0;
+    }
+    //r->set("name", "Andy");
+    r->zadd("mykey", "1", "value1");
+    r->zadd("mykey", "3", "value2");
+    r->zadd("mykey", "13", "value3");
+   //printf("Get the name is %s\n", r->get("name").c_str());
+    std::cout << ">>>>>>>> ZRANGE mykey 0 - 1 " << std::endl;
+    printf("Get the mykey is %s\n", r->zrange_all("mykey").c_str());
+    std::cout << "finish" << std::endl;
+    delete r;
+    return 0;
+}
+
+
